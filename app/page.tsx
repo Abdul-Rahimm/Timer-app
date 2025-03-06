@@ -1,7 +1,15 @@
+"use client"
 import Timer from "@/components/timer";
+import Logs from "@/components/logs";
+import { useState } from "react";
 
-export default function main() {
+
+export default function Main() {
+  const [logs, setLogs] = useState<number[]>([]);
   return (
-    <Timer />
+    <>
+      <Timer setLogs={setLogs} />
+      <Logs logs={logs} />
+    </>
   );
 }

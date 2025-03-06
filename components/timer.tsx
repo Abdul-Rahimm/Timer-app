@@ -1,11 +1,15 @@
 'use client'
 
-import { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function Timer() {
+interface TimerProps {
+    setLogs: React.Dispatch<React.SetStateAction<number[]>>;
+}
+
+
+export default function Timer({ setLogs }: TimerProps) {
     const [seconds, setSeconds] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
-    const [logs, setLogs] = useState<number[]>([]);
     const [mounted, setMounted] = useState(false);
 
 
@@ -37,6 +41,10 @@ export default function Timer() {
         setLogs((prev) => [...prev, seconds]);
     }
 
+    function resetTime() {
+        setSeconds(0);
+    }
+
     if (!mounted)
         return <div>Loading...</div>
 
@@ -54,14 +62,9 @@ export default function Timer() {
                 <button onClick={addLog}>
                     Log
                 </button>
-            </div>
-            <div>
-                <h2 className="text-lg font-bold">Logs</h2>
-                <ul>
-                    {logs.map((log, index) => (
-                        <li key={index}>{log} sec</li>
-                    ))}
-                </ul>
+                <button onClick={resetTime}>
+                    Reset
+                </button>
             </div>
         </div>
     );
