@@ -2,14 +2,28 @@
 import { useState, useEffect } from "react";
 
 export default function Timer() {
-  const [seconds, setSeconds] = useState(0);
+  const time = localStorage.getItem('time') || '0'
+  const [seconds, setSeconds] = useState(parseInt(time));
   const [isRunning, setIsRunning] = useState(false);
+
+  // useEffect(
+  //   () => {
+  //     const time = localStorage.getItem('time')
+  //     if (time != null) {
+  //       setSeconds(parseInt(time))
+  //     }
+  //   }, []
+  // )
 
   useEffect(() => {
     let interval = undefined;
     if (isRunning) {
       interval = setInterval(() => {
-        setSeconds((prev) => prev + 1);
+        setSeconds((prev) => {
+          localStorage.setItem('time', (prev + 1).toString())
+          return prev + 1
+        });
+        console.log(seconds)
       }, 1000);
     } else {
       clearInterval(interval);
