@@ -17,9 +17,9 @@ const HuzzTimer = () => {
   }, [isRunning]);
 
   return (
-    <div className="flex flex-col items-center space-y-4 p-4 border rounded-lg shadow-lg">
-      <h1 className="text-2xl font-bold">Timer: {seconds} sec</h1>
-      <div className="flex space-x-4">
+    <div className="w-screen bg-amber-500 flex flex-col items-center space-y-4 p-4 border rounded-lg shadow-lg ">
+      <h1 className="text-5xl font-bold">Timer: {seconds} sec</h1>
+      <div className="flex space-x-4 text-3xl">
         <button onClick={() => setIsRunning(true)} disabled={isRunning}>
           Start
         </button>
