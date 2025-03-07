@@ -1,5 +1,7 @@
-'use client'
+"use client";
 import { useState, useEffect } from "react";
+
+// Createed rahim branch
 
 export default function Timer() {
   const [seconds, setSeconds] = useState(0);
