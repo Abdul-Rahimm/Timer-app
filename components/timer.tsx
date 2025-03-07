@@ -43,6 +43,7 @@ export default function Timer({ setLogs }: TimerProps) {
 
     function resetTime() {
         setSeconds(0);
+        setIsRunning(false);
     }
 
     if (!mounted)
