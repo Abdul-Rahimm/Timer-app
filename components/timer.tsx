@@ -25,8 +25,9 @@ export default function Timer({ setLogs }: TimerProps) {
         localStorage.setItem('time', (seconds).toString())
     }, [seconds]);
 
+
     useEffect(() => {
-        let interval = undefined;
+        let interval: NodeJS.Timeout | undefined;
         if (isRunning) {
             interval = setInterval(() => {
                 setSeconds((prev) => prev + 1);
