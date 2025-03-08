@@ -2,14 +2,13 @@
 import Timer from "@/components/timer";
 import Logs from "@/components/logs";
 import { useState } from "react";
+import { DataProvider } from "./contexts/DataContext";
 
 
 export default function Main() {
-  const [logs, setLogs] = useState<number[]>([]);
   return (
-    <>
-      <Timer setLogs={setLogs} />
-      <Logs logs={logs} />
-    </>
+    <DataProvider>
+      <Timer />
+    </DataProvider>
   );
 }

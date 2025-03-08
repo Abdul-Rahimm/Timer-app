@@ -1,17 +1,10 @@
-'use client'
-
 import React, { useEffect, useState } from "react";
 
-interface TimerProps {
-    setLogs: React.Dispatch<React.SetStateAction<number[]>>;
-}
 
-
-export default function Timer({ setLogs }: TimerProps) {
+export default function Timer() {
     const [seconds, setSeconds] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [mounted, setMounted] = useState(false);
-
 
     useEffect(
         () => {
@@ -38,9 +31,6 @@ export default function Timer({ setLogs }: TimerProps) {
         return () => clearInterval(interval);
     }, [isRunning]);
 
-    function addLog() {
-        setLogs((prev) => [...prev, seconds]);
-    }
 
     function resetTime() {
         setSeconds(0);
@@ -60,9 +50,6 @@ export default function Timer({ setLogs }: TimerProps) {
                 </button>
                 <button onClick={() => setIsRunning(false)} disabled={!isRunning}>
                     Stop
-                </button>
-                <button onClick={addLog}>
-                    Log
                 </button>
                 <button onClick={resetTime}>
                     Reset
