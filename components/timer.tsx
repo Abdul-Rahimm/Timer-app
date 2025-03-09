@@ -2,21 +2,22 @@
 import React, { useEffect, useState } from "react";
 
 
-export default function Timer() {
+export default function Timer({ id }: { id: string }) {
     const [seconds, setSeconds] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [mounted, setMounted] = useState(false);
+    const timer_id = `timer_${id}`
 
     useEffect(
         () => {
             setMounted(true)
-            const time = localStorage.getItem('time') || '0'
+            const time = localStorage.getItem(timer_id) || '0'
             setSeconds(parseInt(time))
         }, []
     )
 
     useEffect(() => {
-        localStorage.setItem('time', (seconds).toString())
+        localStorage.setItem(timer_id, (seconds).toString())
     }, [seconds]);
 
 

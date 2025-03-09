@@ -12,7 +12,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             {/* description of the task. yet to populate some data. where to do? */}
             <p>Description: {tasks[id]}</p>
             {/* should pass task id to maintain different local storage */}
-            <Timer />
+            <Timer id={id} />
         </>
     )
 }
