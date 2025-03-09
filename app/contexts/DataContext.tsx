@@ -1,20 +1,23 @@
 import { createContext, useContext, useState } from 'react';
 
-interface Data {
-    tasks: {}
+type Data = {
+    tasks: Record<string, string>
+    setTasks: React.Dispatch<React.SetStateAction<Record<string, string>>>
 }
 
-const DataContext = createContext<Data>({ tasks: {} });
+
+const DataContext = createContext<Data | null>(null);
 
 export function DataProvider({ children }: { children: React.ReactNode }) {
-    const [tasks, setTasks] = useState<{}>({})
+    const [tasks, setTasks] = useState({})
     return (
-        <DataContext.Provider value={{ tasks }}>
+        <DataContext.Provider value={{ tasks, setTasks }}>
             {children}
         </DataContext.Provider >
     )
 }
 
-export function useTasks() {
-    return useContext(DataContext);
+export function useData() {
+    const context = useContext(DataContext);
+    return context as Data;
 }
