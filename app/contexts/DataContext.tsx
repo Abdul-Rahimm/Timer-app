@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext, useState } from 'react';
+import { createContext, useEffect, useContext, useState } from 'react';
 
 type Data = {
     tasks: Record<string, string>
@@ -11,6 +11,15 @@ const DataContext = createContext<Data | null>(null);
 
 export function DataProvider({ children }: { children: React.ReactNode }) {
     const [tasks, setTasks] = useState({})
+    useEffect(() => {
+        // fill some dummy data
+        setTasks({
+            1: 'hamm',
+            2: 'huzz',
+            3: 'rahim',
+        })
+
+    }, [])
     return (
         <DataContext.Provider value={{ tasks, setTasks }}>
             {children}
