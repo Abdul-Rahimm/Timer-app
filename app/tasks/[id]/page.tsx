@@ -1,19 +1,16 @@
-import { useTasks } from '@/app/contexts/DataContext'
+'use client'
 import Timer from '@/components/timer'
-import { useRouter } from 'next/router'
+import { useData } from '@/app/contexts/DataContext'
 import React from 'react'
 
-const Page = () => {
-    const router = useRouter()
-    const { tasks } = useTasks()
-    const { id } = router.query;
-    const taskIndex = id ? parseInt(id as string) : -1;
+export default function Page({ params }: { params: { id: string } }) {
+    const { id } = params;
+    const { tasks } = useData()
     return (
         <>
-            <h1> {tasks[taskIndex]} </h1>
+            <h1>Task {id}</h1>
+            <p>{tasks[id]}</p>
             <Timer />
         </>
     )
 }
-
-export default Page 
