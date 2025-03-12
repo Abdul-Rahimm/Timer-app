@@ -5,12 +5,13 @@ import React from 'react'
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = React.use(params);
+    const task_index = parseInt(id)
     const { tasks } = useData()
     return (
         <>
             <h1>Task {id}</h1>
             {/* description of the task. yet to populate some data. where to do? */}
-            <p>Description: {tasks[id]}</p>
+            <p>Description: {tasks[task_index].name}</p>
             {/* should pass task id to maintain different local storage */}
             <Timer id={id} />
         </>

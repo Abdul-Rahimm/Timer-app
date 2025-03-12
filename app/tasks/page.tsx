@@ -1,40 +1,27 @@
 'use client'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useData } from '../contexts/DataContext'
 
-interface Task {
-    name: string,
-    id: number
-}
-
-const Page = () => {
-    const [tasks, setTasks] = useState<Task[]>([])
-
-    useEffect(() => {
-        setTasks([
-            { name: 'Task 1', id: 1 },
-            { name: 'Task 2', id: 2 },
-            { name: 'Task 3', id: 3 },
-        ])
-    }, [])
+export default function Page() {
+    const { tasks } = useData();
 
     return (
         <>
             <h1>Tasks</h1>
             <ul>
-                {
-                    tasks.map((task) =>
-                        <li key={task.id}>
-                            <Link href={`/tasks/${task.id}`}>
-                                {task.name}
-                            </Link>
-                        </li>
-                    )
-                }
+                {tasks.map((task, index) => (
+                    <li key={index}>
+                        <Link href={`/tasks/${index}`}>
+                            {task.name}
+                        </Link>
+                    </li>
+                ))}
             </ul>
 
+            <Link href={'/addTask'}>
+                Add Task
+            </Link>
         </>
-    )
+    );
 }
-
-export default Page 
