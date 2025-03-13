@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useEffect, useContext, useState } from 'react';
+import { createContext, useEffect, useContext, useState, use } from 'react';
 
 type Task = {
     name: string
@@ -16,11 +16,16 @@ const DataContext = createContext<Data | null>(null);
 export function DataProvider({ children }: { children: React.ReactNode }) {
     const [tasks, setTasks] = useState<Task[]>([])
 
-    useEffect(() => {
+    function getTasks() {
         const tasks = localStorage.getItem('tasks')
         if (tasks) {
             setTasks(JSON.parse(tasks))
         }
+    }
+
+    useEffect(() => {
+        getTasks()
+        console.log("tasks loaded")
     }, [])
 
     function addTask(name: string) {
